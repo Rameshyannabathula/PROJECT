@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 app = Flask(__name__)
 
 # MongoDB connection
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient("mongodb+srv://yannabathularamesh:root@cluster0.idjobj1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 db = client['mess_db']
 enrollments = db['enrollments']
 
