@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrollment List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <style>
+        .list-container {
+            margin: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 2px solid #000;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="heading">
+        <h1>Omkar Mess - Enrollment List</h1>
+    </div>
+
+    <div class="navbar">
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('enroll') }}">Enroll</a></li>
+            <li><a href="{{ url_for('due_page') }}">Due</a></li>
+        </ul>
+    </div>
+
+    <div class="list-container">
+        <h2>All Enrollments</h2>
+
+        {% if enrollments %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Days</th>
+                        <th>Meals</th>
+                        <th>Total Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for enrollment in enrollments %}
+                    <tr>
+                        <td>{{ enrollment['name'] }}</td>
+                        <td>{{ enrollment['phone'] }}</td>
+                        <td>{{ enrollment['startdate'] }}</td>
+                        <td>{{ enrollment['enddate'] }}</td>
+                        <td>{{ enrollment['days'] }}</td>
+                        <td>
+                            {% if enrollment['breakfast'] %} Breakfast (₹20) <br>{% endif %}
+                            {% if enrollment['lunch'] %} Lunch (₹40) <br>{% endif %}
+                            {% if enrollment['dinner'] %} Dinner (₹40) {% endif %}
+                        </td>
+                        <td>₹{{ enrollment['amount'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No enrollments found!</p>
+        {% endif %}
+    </div>
+</body>
+</html>

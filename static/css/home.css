@@ -1,0 +1,75 @@
+/* Heading */
+.heading {
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  background-color: hsl(34, 12%, 74%);
+  padding: 5px 5px;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo img {
+  width: 150px;
+  height: 150px;
+}
+
+/* Table styling */
+table, th, td {
+  border: 5px solid;
+  text-align: center;
+  border-collapse: collapse;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+  background-color: #fffefc;
+}
+
+.timetable {
+  display: flex;
+  justify-content: center;
+  margin: 30px;
+}
+
+.timetable table {
+  width: 60%;
+  background-color: #f8f2e8;
+}
+
+/* Navigation Bar Styling */
+.navbar {
+  background-color: #a88f65; /* Earthy tone */
+  padding: 10px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.navbar ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar li {
+  list-style-type: none;
+}
+
+.navbar li a {
+  text-decoration: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.navbar li a:hover {
+  background-color: #8c744e; /* Hover effect */
+}

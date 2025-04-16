@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enroll</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/enroll.css') }}">
+    <script>
+        function calculateCost() {
+            const days = parseInt(document.getElementById('days').value) || 0;
+            const breakfast = document.getElementById('Breakfast').checked ? 20 : 0;
+            const lunch = document.getElementById('lunch').checked ? 40 : 0;
+            const dinner = document.getElementById('dinner').checked ? 40 : 0;
+
+            const dailyCost = breakfast + lunch + dinner;
+            const totalCost = dailyCost * days;
+
+            const button = document.getElementById('payButton');
+            if (totalCost > 0) {
+                button.innerText = `Pay ₹${totalCost}`;
+            } else {
+                button.innerText = 'Submit';
+            }
+
+            // Store value for backend access
+            document.getElementById('amount').value = totalCost;
+        }
+    </script>
+</head>
+<body>
+    <div class="heading">
+        <h1>Omkar Mess</h1>
+    </div>
+    <div class="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="list.html">List</a></li>
+            <li><a href="due.html">Due</a></li>
+        </ul>
+    </div>
+
+    <div class="form">
+        <form action="{{ url_for('enroll') }}" method="post" oninput="calculateCost()">
+            <label for="name">Name:</label>
+            <input id="name" type="text" name="name" required><br>
+
+            <label for="phone">Phone:</label>
+            <input type="tel" name="phone" id="phone" required><br>
+
+            <label for="days">No of days:</label>
+            <input type="number" name="days" id="days" required><br>
+
+            <label for="startdate">Start date:</label>
+            <input type="date" name="startdate" id="startdate" required><br>
+
+            <div class="check">
+                <input type="checkbox" name="breakfast" id="Breakfast">
+                <label for="Breakfast">Breakfast (₹20)</label>
+                <input type="checkbox" name="lunch" id="lunch">
+                <label for="lunch">Lunch (₹40)</label>
+                <input type="checkbox" name="dinner" id="dinner">
+                <label for="dinner">Dinner (₹40)</label>
+            </div>
+
+            <!-- Hidden field to send calculated amount -->
+            <input type="hidden" name="amount" id="amount">
+
+            <button type="submit" id="payButton">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

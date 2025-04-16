@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Due Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <style>
+        .due-container {
+            margin: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 2px solid #000;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="heading">
+        <h1>Omkar Mess - Due Details</h1>
+    </div>
+
+    <div class="navbar">
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('enroll') }}">Enroll</a></li>
+            <li><a href="{{ url_for('list_page') }}">List</a></li>
+        </ul>
+    </div>
+
+    <div class="due-container">
+        <h2>Due Details for Selected Date</h2>
+
+        <form method="POST">
+            <label for="checkdate">Select Date: </label>
+            <input type="date" name="checkdate" required>
+            <button type="submit">Check Due</button>
+        </form>
+
+        {% if checked %}
+            <h3>Due Details for Date: {{ request.form.get('checkdate') }}</h3>
+
+            {% if dues %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Extra Days</th>
+                            <th>Meals</th>
+                            <th>Total Due</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for due in dues %}
+                        <tr>
+                            <td>{{ due['name'] }}</td>
+                            <td>{{ due['phone'] }}</td>
+                            <td>{{ due['startdate'] }}</td>
+                            <td>{{ due['enddate'] }}</td>
+                            <td>{{ due['extra_days'] }}</td>
+                            <td>
+                                {% if due['meals']['breakfast'] %} Breakfast (₹20) <br>{% endif %}
+                                {% if due['meals']['lunch'] %} Lunch (₹40) <br>{% endif %}
+                                {% if due['meals']['dinner'] %} Dinner (₹40) {% endif %}
+                            </td>
+                            <td>₹{{ due['due_amount'] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No dues found for the selected date.</p>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
